@@ -24,6 +24,7 @@ import doodle.core.Point
 import doodle.core.font.Font
 import doodle.core.{Transform => Tx}
 import doodle.java2d.algebra.reified.GraphicsContext
+import doodle.core.ClosedPath
 
 import java.awt.Graphics2D
 import java.awt.geom.Rectangle2D
@@ -153,7 +154,7 @@ object Graphics2DGraphicsContext extends GraphicsContext[Graphics2D] {
       ()
     }
 
-  def clip(gc: Graphics2D)(image: Drawing[A], clip_path: ClosedPath): Unit = ???
+  def clip[A](gc: Graphics2D)(image: Drawing[A], clip_path: ClosedPath): Unit = ???
 
   // Java2D doesn't support fill for text (without using more complicated APIs,
   // that I currently do have the energy to implement). Hence we don't take a

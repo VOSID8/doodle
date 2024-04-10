@@ -25,6 +25,7 @@ import doodle.core.PathElement
 import doodle.core.Point
 import doodle.core.font.Font
 import doodle.core.{Transform => Tx}
+import doodle.core.ClosedPath
 
 import java.awt.geom.Rectangle2D
 import java.awt.image.BufferedImage
@@ -69,8 +70,8 @@ sealed abstract class Reified extends Product with Serializable {
       case Bitmap(tx, image) =>
         ctx.bitmap(gc)(tx.andThen(finalTransform), image)
 
-      case Clip(image, clip_path) =>
-        ctx.clip(gc)(image, clip_path)
+      // case Clip(image, clip_path) =>
+      //   ctx.clip(gc)(image, clip_path)
 
       case Text(tx, _, stroke, text, font, bounds) =>
         ctx.text(gc)(tx.andThen(finalTransform), stroke, text, font, bounds)
@@ -140,7 +141,7 @@ object Reified {
   ) extends Reified
   final case class Bitmap(transform: Tx, image: BufferedImage) extends Reified
 
-  final case class Clip(image: Drawing[A], clip_path: ClosedPath) extends Reified
+  final case class Clip[A](image: Drawing[A], clip_path: ClosedPath) extends Reified
   final case class Text(
       transform: Tx,
       fill: Option[Fill],
@@ -207,7 +208,7 @@ object Reified {
   def bitmap(transform: Tx, image: BufferedImage): Reified =
     Bitmap(transform, image)
 
-  def clip(image: Drawing[A], clip_path: ClosedPath): Reified =
+  def clip[A](image: Drawing[A], clip_path: ClosedPath): Reified =
     Clip(image, clip_path)
 
   def text(

@@ -23,10 +23,8 @@ import doodle.core.ClosedPath
 import doodle.algebra.Algebra
 
 
-import java.io.File
-
 trait ClipSyntax {
-    implicit class BlendPictureOps[Alg <: Algebra, A](
+    implicit class ClipOps[Alg <: Algebra, A](
       picture: Picture[Alg, A]
   ) {
     def clip(clip_path: ClosedPath): Picture[Alg with Clip, A] = 

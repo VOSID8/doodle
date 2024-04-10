@@ -25,6 +25,7 @@ import cats.data.WriterT
 import doodle.algebra.generic._
 import doodle.core.BoundingBox
 import doodle.core.Transform
+import doodle.core.ClosedPath
 
 import java.io.File
 import javax.imageio.ImageIO
