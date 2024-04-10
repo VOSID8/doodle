@@ -153,6 +153,8 @@ object Graphics2DGraphicsContext extends GraphicsContext[Graphics2D] {
       ()
     }
 
+  def clip(gc: Graphics2D)(image: Drawing[A], clip_path: ClosedPath): Unit = ???
+
   // Java2D doesn't support fill for text (without using more complicated APIs,
   // that I currently do have the energy to implement). Hence we don't take a
   // fill parameter here.

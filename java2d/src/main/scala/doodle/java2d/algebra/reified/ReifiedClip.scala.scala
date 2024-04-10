@@ -29,23 +29,9 @@ import doodle.core.Transform
 import java.io.File
 import javax.imageio.ImageIO
 
-trait ReifiedBitmap extends doodle.algebra.Bitmap with doodle.algebra.Clip {
+trait ReifiedClip extends doodle.algebra.Clip {
   self: Algebra { type Drawing[A] <: doodle.java2d.Drawing[A] } =>
 
-  def read(file: File): Drawing[Unit] = {
-    Finalized.leaf { _ =>
-      val bi = ImageIO.read(file)
-      val w = bi.getWidth()
-      val h = bi.getHeight()
-      val bb = BoundingBox.centered(w.toDouble, h.toDouble)
-      (
-        bb,
-        State.inspect { (tx: Transform) =>
-          WriterT.tell[Eval, List[Reified]](List(Reified.bitmap(tx, bi)))
-        }
-      )
-
-    }
-  }
-  def clip(file: File): Drawing[Unit] = ???
+  def clip[A](image: Drawing[A],clip_path: ClosedPath): Drawing[Unit] = ???
 }
+

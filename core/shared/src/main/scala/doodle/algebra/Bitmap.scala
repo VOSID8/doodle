@@ -40,12 +40,13 @@ trait BitmapConstructor {
     */
   def read(file: File): Picture[Unit] =
     new Picture[Unit] {
-      def apply(implicit algebra: Algebra): algebra.Drawing[Unit] =
+      def apply(implicit algebra: Algebra): algebra.Drawing[Unit] = {
         algebra.read(file)
+      }
     }
 
-  /** Convenience to read an image from the file specified in the given String
-    */
+  // /** Convenience to read an image from the file specified in the given String
+  //   */
   def read(file: String): Picture[Unit] =
     new Picture[Unit] {
       def apply(implicit algebra: Algebra): algebra.Drawing[Unit] =

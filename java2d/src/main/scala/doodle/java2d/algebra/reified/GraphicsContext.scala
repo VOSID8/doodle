@@ -68,6 +68,8 @@ trait GraphicsContext[A] {
 
   def bitmap(gc: A)(transform: Transform, image: BufferedImage): Unit
 
+  def clip(gc: A)(image: Drawing[A], clip_path: ClosedPath): Unit
+
   def text(
       gc: A
   )(

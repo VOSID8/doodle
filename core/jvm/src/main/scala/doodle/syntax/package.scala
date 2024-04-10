@@ -16,11 +16,14 @@
 
 package doodle
 
+import javax.sound.sampled.Clip
+
 package object syntax {
   object all
       extends AngleSyntax
       with Base64WriterSyntax
       with BitmapSyntax
+      with ClipSyntax
       with BlendSyntax
       with BufferedImageWriterSyntax
       with DebugSyntax
@@ -40,6 +43,7 @@ package object syntax {
   object angle extends AngleSyntax
   object base64Writer extends Base64WriterSyntax
   object bitmap extends BitmapSyntax
+  object clip extends ClipSyntax
   object blend extends BlendSyntax
   object bufferedImageWriter extends BufferedImageWriterSyntax
   object debug extends DebugSyntax

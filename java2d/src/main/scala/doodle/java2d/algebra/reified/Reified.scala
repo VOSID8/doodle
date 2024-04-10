@@ -69,6 +69,9 @@ sealed abstract class Reified extends Product with Serializable {
       case Bitmap(tx, image) =>
         ctx.bitmap(gc)(tx.andThen(finalTransform), image)
 
+      case Clip(image, clip_path) =>
+        ctx.clip(gc)(image, clip_path)
+
       case Text(tx, _, stroke, text, font, bounds) =>
         ctx.text(gc)(tx.andThen(finalTransform), stroke, text, font, bounds)
     }
@@ -136,6 +139,8 @@ object Reified {
       elements: List[PathElement]
   ) extends Reified
   final case class Bitmap(transform: Tx, image: BufferedImage) extends Reified
+
+  final case class Clip(image: Drawing[A], clip_path: ClosedPath) extends Reified
   final case class Text(
       transform: Tx,
       fill: Option[Fill],
@@ -201,6 +206,9 @@ object Reified {
     StrokeOpenPath(transform, stroke, elements)
   def bitmap(transform: Tx, image: BufferedImage): Reified =
     Bitmap(transform, image)
+
+  def clip(image: Drawing[A], clip_path: ClosedPath): Reified =
+    Clip(image, clip_path)
 
   def text(
       transform: Tx,
